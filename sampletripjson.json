@@ -1,0 +1,116 @@
+[
+    {
+        "Day 1": {
+            "Activity": [
+                {
+                    "title": "Arrival at Bozeman Yellowstone International Airport (BZN)",
+                    "start_at": "2023-12-24T17:32:00Z",
+                    "description": "Arrive at Bozeman Yellowstone International Airport (BZN). Airline: American Airlines, Flight Number: AA 1056, Chelsea\'s Flight.",
+                    "type": {
+                        "name": "Activity"
+                    }
+                },
+                {
+                    "title": "Car Rental from Budget",
+                    "start_at": "2023-12-24T18:00:00Z",
+                    "description": "Budget Rental Cars booked through AutoEurope. Carrier: Budget, Car Model: HYUNDAI ELANTRA OR SIMILAR, Location: Bozeman Airport Desk in Terminal, Address: 850 Gallatin Field Rd, Ste 2, Belgrade, Montana, Bozeman, US, Tel: 406 388 4091.",
+                    "type": {
+                        "name": "Transfer"
+                    }
+                },
+                {
+                    "title": "Hike to Fairy Falls",
+                    "description": "Fairy Falls Trail to see Grand Prismatic Spring, hike further for Fairy Falls and Imperial Geyser and Spray Geyser. There are two trailheads and two different approaches to hiking to the falls. You can park 1 mile south of Midway Geyser Basin at the Fairy Falls Parking Lot. Or park at the end of Fountain Flat Drive. You’ll walk through a lodgepole pine forest to the falls along a 5-mile round-trip route. There\'s a parking lot near the Fairy Falls Trailhead at Midway Geyser Basin. Visit Old Faithful Visitor Center for times.",
+                    "type": {
+                        "name": "Activity"
+                    }
+                },
+                {
+                    "title": "Check in at Old Faithful Inn",
+                    "check_in": "2023-12-24T00:00:00Z",
+                    "description": "Check into Old Faithful Inn, a national historic landmark and the most requested lodging facility in the park. Built in 1903-1904 with local logs and stone, the Inn is considered the largest log structure in the world. The towering lobby features a massive stone fireplace and a hand-crafted clock made of copper, wood and wrought iron serving as focal points. Address: Yellowstone National Park, WY 82190, Phone: +1-307-344-7311.",
+                    "type": {
+                        "name": "Lodging"
+                    }
+                },
+                {
+                    "title": "Dinner at Old Faithful Inn",
+                    "start_at": "2023-12-25T02:30:00Z",
+                    "description": "Dinner at Old Faithful Inn Dining Room, Address: 3200 Old Faithful Inn Road, YNP WY 82190, Phone: +1 (307) 344-7311.",
+                    "type": {
+                        "name": "Activity"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Day 2": {
+            "Lodging": [
+                {
+                    "title": "Check out at Old Faithful Inn",
+                    "check_out": "2023-12-25T00:00:00Z",
+                    "description": "Check out from Old Faithful Inn, Yellowstone National Park, WY, US, 82190.",
+                    "type": {
+                        "name": "Lodging"
+                    }
+                },
+                {
+                    "title": "Check in at Canyon Lodge",
+                    "check_in": "2023-12-25T00:00:00Z",
+                    "description": "Check into Canyon Lodge, featuring rustic-chic surroundings with a floor-to-ceiling stone fireplace in the lobby, log-rail staircase, and Mission-style guest rooms. Address: N Rim Dr, Yellowstone National Park, WY, US, 82190, Phone: +1-307-344-7311.",
+                    "type": {
+                        "name": "Lodging"
+                    }
+                }
+            ],
+            "Activity": [
+                {
+                    "title": "Dinner at Lake Hotel",
+                    "start_at": "2023-12-26T02:30:00Z",
+                    "description": "Dinner at Lake Yellowstone Hotel Dining Room, known for its creative and upscale menu with a commitment to sustainable cuisine. Special Occasions: Birthday and First Visit. Address: 235 Yellowstone Lake Rd., YNP WY 82190, Phone: +1 (307) 344-7311.",
+                    "type": {
+                        "name": "Activity"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Day 3": {
+            "Activity": [
+                {
+                    "title": "Upper Loop Tour",
+                    "description": "The Upper Loop takes about 2 hours to drive, not counting any traffic or wildlife jams. Attractions include Mammoth Hot Springs, Tower Falls, the Grand Canyon of the Yellowstone, and Norris Geyser Basin. Beware of bear, buffalo, and traffic jams.",
+                    "type": {
+                        "name": "Tour"
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "Day 4": {
+            "Lodging": [
+                {
+                    "title": "Check out at Canyon Lodge",
+                    "check_out": "2023-12-27T00:00:00Z",
+                    "description": "Check out from Canyon Lodge, N Rim Dr, Yellowstone National Park, WY, US, 82190.",
+                    "type": {
+                        "name": "Lodging"
+                    }
+                }
+            ],
+            "Activity": [
+                {
+                    "title": "Departure from Bozeman Yellowstone International Airport (BZN)",
+                    "start_at": "2023-12-27T17:46:00Z",
+                    "description": "Depart from Bozeman Yellowstone International Airport (BZN) with United Airlines, Flight Number UA 495, Seat/Ticket Details: 25F, Jamie\'s Flight.",
+                    "type": {
+                        "name": "Activity"
+                    }
+                }
+            ]
+        }
+    }
+]

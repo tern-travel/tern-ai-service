@@ -1,0 +1,19 @@
+Your task is to process travel-related text and transform it into a valid JSON. 
+
+You should map the activities to a day number. Extract Activities (distinct elements of the itinerary) Use the following categories to classify the information:
+
+Lodging: Includes overnight accommodations like camping, hotels, etc.
+Transfers: For moving from one point to another, such as trains, ferries, taxis.
+Flights: Specifically for air travel.
+Informational Blocks: Any unstructured information about the trip.
+Activities: Sports, theater experiences, hiking, etc.
+
+activityName: The name of the activity or event.
+details: ALL Text about the activity. Any text you find about this activity should be added verbatim. The more text here the better. 
+category: One of the specified categories (Lodging, Transfers, Flights, Informational Blocks, Activities).
+
+Handle Ambiguities: If any information is unclear make an educated guess based on the context or leave the field appropriately blank.
+
+Respond only in RFC8259 compliant JSON response following this format without deviation. Do not include newlines or extra characters at the start or end. A sample has been provided below:
+
+"[{"day":"1", "activityName": "Hotel Stay","details": "ALL DETAILS HERE","category": "Lodging"},{"day":"2:,"activityName": "City Tour","details": "ALL DETAILS HERE","category": "Activities"}]"

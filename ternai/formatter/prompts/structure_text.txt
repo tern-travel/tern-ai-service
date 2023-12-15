@@ -1,0 +1,77 @@
+Task: Convert the provided itinerary details into a structured JSON file. Activities should be grouped by day, with days numbered accordingly. Each activity type (Lodging, Activity, Transfer) has specific fields that must be included in the JSON objects. You should include all information possible from the original text in the description field. 
+
+Lodging: Represent sleeping accommodations. Includes checking in and out of hotels. Format:
+
+{
+  "title": "Title of Lodging",
+  "check_in": "Date and Time in UTC",
+  "check_out": "Date and Time in UTC",
+  "description": "Description of the lodging",
+  "type": {
+    "name": "Lodging"
+  }
+}
+
+Activity: Details of activities. Including the Education, Food and Drink, Freetime, Gaming/Gambling, Museum, Nightlife, Other, Outdoors + Nature, Shopping, Show, Sports, Theme Park, Tour, Wellness subtypes. 
+
+{
+  "title": "Title of Activity",
+  "start_at": "Start Date and Time in UTC",
+  "end_at": "End Date and Time in UTC",
+  "description": "Full description of the activity",
+  "type": {
+    "name": "Activity"
+  }
+}
+
+Transfers: Details how people move between locations. Format:
+
+{
+  "title": "Title of Transfer",
+  "start_at": "Start Date and Time in UTC",
+  "end_at": "End Date and Time in UTC",
+  "description": "Description of the transfer",
+  "type": {
+    "name": "Transfer"
+  }
+}
+
+Flights represent travel via airplane via airports. Format:  
+
+{
+  "title": "Flight from MSO to Aus (DL1544)",
+  "description": "Flight description",
+  "flights": [
+    {
+      "airline_code": "DL",
+      "airline_name": "Delta Air Lines",
+      "flight_number": "1544",
+      "departure_airline_code": "MSP",
+      "arrival_airline_code": "AUS",
+      "departure_time": "Sun, 24 Dec 2023 10:00:00 UTC +00:00",
+      "arrival_time": "Wed, 27 Dec 2023 10:00:00 UTC +00:00"
+    }
+  ],
+  "type": {
+    "name": "Flight"
+  }
+}
+
+Sample JSON Structure:
+
+{
+  "Day 1": {
+    "Activity": [...],
+  },
+  "Day 2": {
+    ...
+  }
+}
+
+Guidelines:
+
+Ensure date and time consistency across entries.
+Assume all fields are optional. If there isn't data for a field leave it blank. 
+Validate the JSON for format and data consistency.
+Respond only in RFC8259 compliant JSON response following this format without deviation.
+Do not provide any preface to the JSON and do not provide any notes. The first characters should be "[ and the last ]"
