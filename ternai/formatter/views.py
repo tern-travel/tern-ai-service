@@ -20,7 +20,6 @@ class ParseURLView(APIView):
                 clean_html = html_manager.process_website(get_url)
                 results = ai_coordinator.ai_parser(clean_html)
 
-                
                 return Response(results, status=status.HTTP_200_OK)
             else:
                 return Response(results, status=status.HTTP_404_NOT_FOUND)

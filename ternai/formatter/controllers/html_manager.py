@@ -20,6 +20,7 @@ def load_html(url:str):
 
     # Disable JavaScript and images
     prefs = {"profile.managed_default_content_settings.images": 2}
+    options.add_argument("--headless=new")
     options.add_experimental_option("prefs", prefs)
 
     driver = webdriver.Chrome(options=options)

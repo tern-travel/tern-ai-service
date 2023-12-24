@@ -6,41 +6,43 @@ Lodging: Represent sleeping accommodations. Includes checking in and out of hote
   "title": "Title of Lodging",
   "check_in": "Date and Time in UTC",
   "check_out": "Date and Time in UTC",
-  "description": "Description of the lodging",
+  "activity_description": "Full description of the activity",
   "type": {
     "name": "Lodging"
   }
 }
 
-Activity: Details of activities. Including the Education, Food and Drink, Freetime, Gaming/Gambling, Museum, Nightlife, Other, Outdoors + Nature, Shopping, Show, Sports, Theme Park, Tour, Wellness subtypes. 
+Activity: Details of activities. These include education activities, Food and Drink, Freetime, Gaming/Gambling, Museum, Nightlife, Other, Outdoors + Nature, Shopping, Show, Sports, Theme Park, Tour, Wellness. All of these should be of type activity with the closest subtype.
 
 {
   "title": "Title of Activity",
   "start_at": "Start Date and Time in UTC",
   "end_at": "End Date and Time in UTC",
-  "description": "Full description of the activity",
+  "activity_description": "Full description of the activity",
+  "subtype":"Food and Drink",
   "type": {
     "name": "Activity"
   }
 }
 
-Transfers: Details how people move between locations. Format:
+Transfers: Details how people move between locations. Transfer subtypes are Transfer, Train, Ferry, Rental Car, and Other. Format:
 
 {
   "title": "Title of Transfer",
   "start_at": "Start Date and Time in UTC",
   "end_at": "End Date and Time in UTC",
-  "description": "Description of the transfer",
+  "activity_description": "Full description of the activity",
   "type": {
     "name": "Transfer"
-  }
+  },
+  "subtype":"Rental Car"
 }
 
 Flights represent travel via airplane via airports. Format:  
 
 {
   "title": "Flight from MSO to Aus (DL1544)",
-  "description": "Flight description",
+  "activity_description": "Full description of the activity",
   "flights": [
     {
       "airline_code": "DL",
@@ -57,16 +59,19 @@ Flights represent travel via airplane via airports. Format:
   }
 }
 
-Sample JSON Structure:
+You should put these together into a single trip object that has a title. Each day has a day count representing the order the activities appear on the trip. Create a title that represents the trip. Sample JSON Structure:
 
-{
-  "Day 1": {
-    "Activity": [...],
+"{
+  "title":"Created Trip Title",
+  "days":[{
+    "day_order":"1",
+    "activity": [...],
   },
-  "Day 2": {
-    ...
-  }
-}
+  {
+    "day_order":"2",
+    "activity": [...],
+  }]
+}"
 
 Guidelines:
 
@@ -74,4 +79,5 @@ Ensure date and time consistency across entries.
 Assume all fields are optional. If there isn't data for a field leave it blank. 
 Validate the JSON for format and data consistency.
 Respond only in RFC8259 compliant JSON response following this format without deviation.
-Do not provide any preface to the JSON and do not provide any notes. The first characters should be "[ and the last ]"
+You should escape characters as needed to ensure valid json.
+Do not provide any preface to the JSON and do not provide any notes. The first characters should be "{ and the last }" 
