@@ -1,5 +1,6 @@
-Django
-django_rest_frameworkclear
-selenium
-beautifulsoup4
-requests
+Django==5.0
+djangorestframework>=3.14
+selenium>=4.16.0
+beautifulsoup4>=4.12.2
+requests>=2.31.0
+openai>=1.6.1
