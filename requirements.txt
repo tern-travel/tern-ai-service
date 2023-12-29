@@ -1,4 +1,4 @@
-Django==5.0
+Django
 djangorestframework>=3.14
 selenium>=4.16.0
 beautifulsoup4>=4.12.2

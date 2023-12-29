@@ -11,7 +11,8 @@ class APICall(models.Model):
     prompt_text = models.TextField()
     in_progress = models.BooleanField()
     complete = models.BooleanField()
-    response = models.TextField()
+    response = models.JSONField(blank = True)
+
 
 #This is a list of supported models and their API values. 
 class AIModel(models.Model): 
@@ -19,32 +20,40 @@ class AIModel(models.Model):
     context_window = models.IntegerField()
     api_value = models.CharField(max_length=256, blank = False)
     name = models.CharField(max_length=256)
+    price_per_1ktoken = models.DecimalField(max_digits=7, decimal_places=6)
+
+    def __str__(self):
+        return self.name
 
 
 #These are the prompts that help us construct the calls to openAI. e.g.gpt-3.5-turbo-0613
 class Prompt(models.Model): 
     id = models.AutoField(primary_key=True)
     instructions = models.TextField(blank = False)
-    ai_model = models.CharField(max_length = 256, help_text = "The OpenAI Model to Use (e.g.gpt-3.5-turbo-0613)")
     example_response = models.TextField(blank = False)
     model = models.ForeignKey(AIModel, on_delete = models.RestrictedError)
 
 
 # This is used to route to the right endpoint
-class Endpoints(models.Model): 
+class Endpoint(models.Model): 
     id = models.AutoField(primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     slug = models.CharField(max_length=30, unique = True)
     prompt = models.ForeignKey(Prompt, on_delete = models.RestrictedError)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.slug + " : "  + self.prompt.model.name
 
 
 #This takes in the JSON Object
 class ExternalCall(models.Model): 
     id = models.AutoField(primary_key=True)
-    endpoint_id = models.ForeignKey(Endpoints, on_delete = models.DO_NOTHING)
+    endpoint = models.ForeignKey(Endpoint, on_delete = models.DO_NOTHING)
     webhook_url = models.URLField()
     text_payload = models.TextField()
+    description = models.TextField()
 
 
 class Log(models.Model): 

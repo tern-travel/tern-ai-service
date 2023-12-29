@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import PrimaryAPISerializer
 from .controllers import pre_processor
+from .models import Endpoint
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -17,10 +19,13 @@ class PrimaryAPIEndpoint(APIView):
             serializer = PrimaryAPISerializer(data=request.data)
             if serializer.is_valid():
                 # Process the valid data, e.g., parse the URL
-                response = pre_processor(serializer)
+
+                #First create a Django Object to Call
+                request_object = serializer.create(serializer.validated_data)
+                response = pre_processor.manage_request(request_object)
 
                 #This is where the logic goes
-                return Response("results", status=status.HTTP_200_OK)
+                return JsonResponse(response)
             
             else:
 

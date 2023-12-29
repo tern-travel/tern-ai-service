@@ -5,7 +5,7 @@ from .models import ExternalCall
 class PrimaryAPISerializer(serializers.ModelSerializer):
     class Meta:
         model = ExternalCall
-        fields = ['endpoint_id','json_payload','webhook_url']
+        fields = ['endpoint','text_payload','webhook_url']
         
-        def create(self, validated_data):
-            return ExternalCall.objects.create(**validated_data)
+    def create(self, validated_data):
+        return ExternalCall.objects.create(**validated_data)
