@@ -17,11 +17,11 @@ def make_ai_call(prompt:str, endpoint_used:ExternalCall):
   )
 
   response_dict = json.loads(response.choices[0].message.content)
-  log_api_call(endpoint_used.endpoint.prompt.instructions,response_dict)
+  log_api_call(endpoint_used.endpoint.prompt.instructions,response_dict, endpoint_used)
   return response_dict
 
 
-def log_api_call(prompt:str, results:dict):
+def log_api_call(prompt:str, results:dict, caller:ExternalCall):
   
   response_json = json.dumps(results)
 
@@ -29,7 +29,8 @@ def log_api_call(prompt:str, results:dict):
     prompt_text=prompt,
     in_progress=False,
     complete=True,
-    response=response_json
+    response=response_json, 
+    source_call = caller
   )
   
   new_api_call.save()
