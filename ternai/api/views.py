@@ -7,12 +7,17 @@ from .serializers import PrimaryAPISerializer
 from .controllers import pre_processor
 from .models import Endpoint
 from django.http import JsonResponse
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
 
 class PrimaryAPIEndpoint(APIView):
     
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, format=None):
         
         if request.method == 'POST':
