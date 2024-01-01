@@ -5,7 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from .serializers import PrimaryAPISerializer
 from .controllers import pre_processor
+import json
 from .models import Endpoint
+from .helpers import log_manager
 from django.http import JsonResponse
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
@@ -24,6 +26,17 @@ class PrimaryAPIEndpoint(APIView):
             serializer = PrimaryAPISerializer(data=request.data)
             if serializer.is_valid():
                 # Process the valid data, e.g., parse the URL
+        
+                #Check that either a file or text is passed in
+                if serializer.data['text_payload'] == None and serializer.data["file"] == None:
+                    error_dict = log_manager.error_builder("No payload or file recieved",serializer.data)
+                    return JsonResponse(error_dict, status=status.HTTP_400_BAD_REQUEST)
+
+                if pre_processor.validate_json(serializer.data['text_payload']) == False:
+                    create_log("Invalid JSON Passed", status.HTTP_400_BAD_REQUEST)
+                    error_dict = log_manager.error_builder("Invalid JSON Passed",serializer.data)
+                    return JsonResponse(error_dict, status=status.HTTP_400_BAD_REQUEST)
+                
 
                 #First create a Django Object to Call
                 request_object = serializer.create(serializer.validated_data)
@@ -36,8 +49,8 @@ class PrimaryAPIEndpoint(APIView):
 
                 log_error = "Log Error "  + " Value : " + str(request.data)
                 create_log(log_error, status.HTTP_400_BAD_REQUEST)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
             log_error = "Log Error "  + " POST Request Not Used : " + str(request.data)
             create_log(log_error, status.HTTP_400_BAD_REQUEST)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

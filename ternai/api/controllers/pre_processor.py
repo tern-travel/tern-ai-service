@@ -1,10 +1,19 @@
 from api.serializers import PrimaryAPISerializer
+from django.http import HttpResponseBadRequest
 import json
 from api.models import ExternalCall
 from api.models import Endpoint
 from api.helpers import log_manager
 from api.controllers import ai_caller
 
+
+#A super simple method to validate JSON
+def validate_json(text_given:str):
+    try: 
+        json.loads(text_given)
+        return True
+    except:
+        return False
 
 #This manages the request 
 def manage_request(created_object:ExternalCall): 
@@ -19,7 +28,6 @@ def manage_request(created_object:ExternalCall):
         
     else:
         log_manager.create_log("Invalid Endpoint ID Passed: " + str(PrimaryAPISerializer), "ERROR")
-
 
 #A simple method to go through and find the Ids of the end point
 def is_endpoint_valid(id_to_check:int): 

@@ -1,9 +1,6 @@
 from django.db import models
 import uuid
 
-
-
-
 #This is a list of supported models and their API values. 
 class AIModel(models.Model): 
     id = models.AutoField(primary_key=True)
@@ -22,7 +19,9 @@ class Prompt(models.Model):
     name = models.CharField(max_length=30, unique = True, blank=True)
     instructions = models.TextField(blank = False)
     example_response = models.TextField(blank = False)
+    required_response_keys = models.JSONField() #used to validate the model gives back the required values
     model = models.ForeignKey(AIModel, on_delete = models.RestrictedError)
+    ai_temperature = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -46,10 +45,10 @@ class ExternalCall(models.Model):
     id = models.AutoField(primary_key=True)
     endpoint = models.ForeignKey(Endpoint, on_delete = models.DO_NOTHING)
     webhook_url = models.URLField()
-    text_payload = models.TextField()
+    text_payload = models.TextField(blank=True, null=True)
     description = models.TextField()
     tern_user_id = models.IntegerField()
-
+    file = models.FileField(upload_to='pdfs/', blank=True, null=True)
 
 class Log(models.Model): 
     id = models.AutoField(primary_key=True)
@@ -69,6 +68,11 @@ class APICall(models.Model):
     complete = models.BooleanField()
     response = models.JSONField(blank = True)
     source_call = models.ForeignKey(ExternalCall, on_delete=models.RESTRICT, blank = True)
+    error_text = models.TextField()
+    valid_resopnse = models.BooleanField()
+
 
     def __str__(self):
         return self.source_call.endpoint.name + " User: " + str(self.source_call.tern_user_id)
+    
+
