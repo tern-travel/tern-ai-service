@@ -8,6 +8,17 @@ class AIModel(models.Model):
     api_value = models.CharField(max_length=256, blank = False)
     name = models.CharField(max_length=256)
     price_per_1ktoken = models.DecimalField(max_digits=7, decimal_places=6)
+    largest_token_model = models.BooleanField(default = False)
+
+    def __str__(self):
+        return self.name
+    
+    def save(self, *args, **kwargs):
+        if self.largest_token_model:
+            # If this instance is set to be the largest_token_model,
+            # set all others to not be the largest_token_model.
+            AIModel.objects.filter(largest_token_model=True).update(largest_token_model=False)
+        super(AIModel, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -19,7 +30,7 @@ class Prompt(models.Model):
     name = models.CharField(max_length=30, unique = True, blank=True)
     instructions = models.TextField(blank = False)
     example_response = models.TextField(blank = False)
-    required_response_keys = models.JSONField() #used to validate the model gives back the required values
+    required_response_keys = models.JSONField(blank=True, null=True) #used to validate the model gives back the required values
     model = models.ForeignKey(AIModel, on_delete = models.RestrictedError)
     ai_temperature = models.IntegerField()
 
@@ -48,7 +59,7 @@ class ExternalCall(models.Model):
     text_payload = models.TextField(blank=True, null=True)
     description = models.TextField()
     tern_user_id = models.IntegerField()
-    file = models.FileField(upload_to='pdfs/', blank=True, null=True)
+    file_uploaded = models.FileField(upload_to='pdfs/', blank=True, null=True)
 
 class Log(models.Model): 
     id = models.AutoField(primary_key=True)

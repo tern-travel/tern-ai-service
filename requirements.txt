@@ -4,3 +4,5 @@ selenium>=4.16.0
 beautifulsoup4>=4.12.2
 requests>=2.31.0
 openai>=1.6.1
+PyPDF2
+tiktoken
